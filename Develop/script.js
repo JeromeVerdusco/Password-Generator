@@ -25,34 +25,23 @@ var selectValues = function() {
     
     var countOptions = 0;
     //-prompt user if they want to include uppercase
-    var capLetters = window.confirm("Do you want captial letters? OK = YES  Cancel = NO");
-    if (capLetters == 0) {
-      countOptions = countOptions + 1;
-     }
+    capLetters = window.confirm("Do you want captial letters? OK = YES  Cancel = NO");  
 
     //-prompt user if they want to include lowercase
-    var lowerCase = window.confirm("Do you want lower case letters? OK = YES  Cancel = NO");
-    if (lowerCase == 0) {
-      countOptions = countOptions + 1;
-    }
+    lowerCase = window.confirm("Do you want lower case letters? OK = YES  Cancel = NO");  
 
     //-prompt user if they want to include numeric
-    var wholeNum = window.confirm("Do you want numbers? OK = YES  Cancel = NO");
-    if (wholeNum == 0) {
-      countOptions = countOptions + 1;
-    }
-
+    wholeNum = window.confirm("Do you want numbers? OK = YES  Cancel = NO");
+    
     //-prompt user if they want to include special characters
-    var specialChar = window.confirm("Do you want special characters? OK = YES  Cancel = NO");
-    if (specialChar == 0) {
-      countOptions = countOptions + 1;
-    }
+    specialChar = window.confirm("Do you want special characters? OK = YES  Cancel = NO");   
 
     //- NOTE: At least one of the above answers needs to be yes  
-    if (countOptions == 4) {
+    if (!capLetters && !lowerCase && !wholeNum && !specialChar) {
       window.alert("You need to select at least one parameter value for the password.  Try again!");
       return selectValues();
     }
+
 }  // end of user inputs for password
 
 
