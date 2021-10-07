@@ -1,4 +1,13 @@
 
+// Array of special characters to be included in password
+var splChar = ['@', '%', '+', '/', '!', '#', '$', '^', '?', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.'];
+// Array of numeric characters to be included in password
+var numericChar = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+// Array of lowercase characters to be included in password
+var smallLeters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+// Array of uppercase characters to be included in password
+var capitalLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
 // Input variables
 var passLength;
 var capLetters;
@@ -6,29 +15,7 @@ var lowerCase;
 var wholeNum;
 var specialChar;
 
-const randomVal = {
-  cap: getRandomUpper,
-  lower: getRandomLower,
-  whole: getRandomWholeNum,
-  special: getRandomSpecialChar
-};
-
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var passwords = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = passwords;
-
-  selectValues(); 
-}
  
-
-
 // beginning of user PROMPT's to enter inputs
 function selectValues() {
   //-prompt user to select password length between 8 and 128 characters
@@ -62,77 +49,52 @@ function selectValues() {
   window.alert("You need to select at least one parameter value for the password.  Try again!");
   return selectValues();
   }
-
-  console.log(capLetters);
-  console.log(lowerCase);
-  console.log(wholeNum);
-  console.log(specialChar);
-
-  generatePassword();
-}  
-// end of user inputs for password
-
-
-// Functions to generate random characters from Browser Character Set
-function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-  }
-  console.log(getRandomUpper());
-
-function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-console.log(getRandomLower());
-
-function getRandomWholeNum() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
-}
-console.log(getRandomWholeNum());
-
-function getRandomSpecialChar() {
-  const symbols = '!@#$%^&*';
-  return symbols[Math.floor(Math.random() * symbols.length)];
-}
-console.log(getRandomSpecialChar());
-
-
-
-function generatePassword(capLetters, lowerCase,  wholeNum, specialChar, passLength) {
-  let generatedPassword = '';
-  const typesCount = capLetters + lowerCase + wholeNum + specialChar;
-  console.log('typesCount: ', typesCount);
-  const typesArr = [{capLetters},  {lowerCase}, {wholeNum}, {specialChar}].filter(item => Object.values(item)[0]);
-  
-  console.log('typesArr: ', typesArr);
+  // end of user inputs for password 
     
-  // create a loop
-  for(let i=0; i<passLength; i+=typesCount) {
-    typesArr.forEach(type => {
-      funcName = Object.keys(type)[0];
-      generatedPassword += randomVal[funcName]();
-    });
-  }
-  
-  const finalPassword = generatedPassword;
 
-  //console.log(passwords);
+    // create IF statements for selected characters
+    var passwordGen = []
 
-  return finalPassword; 
-  
-} 
+    if (capLetters) {
+      passwordGen = passwordGen.concat(capitalLetters)
+    }
 
-typesArr = [{capLetters},  {lowerCase}, {wholeNum}, {specialChar}].filter(item => Object.values(item)[0]);
-  
-console.log('typesArr: ', typesArr);
+    if (lowerCase) {
+      passwordGen = passwordGen.concat(smallLeters)
+    }
 
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
+    if (wholeNum) {
+      passwordGen = passwordGen.concat(numericChar)
+    }
+
+    if (specialChar) {
+      passwordGen = passwordGen.concat(splChar)
+    }
+
+      console.log(passwordGen)
+
+      // For loop selecting random characters from array
+      var generatePass = ""
+      
+      for (var i = 0; i < passLength; i++) {
+        generatePass = generatePass + passwordGen[Math.floor(Math.random() * passwordGen.length)];
+        console.log(generatePass)
+      }
+
+      return generatePass;
+}      
+
+
+    // Get references to the #generate element
+    var generateBtn = document.querySelector("#generate");
+
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = selectValues();
   var passwordText = document.querySelector("#password");
+
   passwordText.value = password;
 }
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword); 
 
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
