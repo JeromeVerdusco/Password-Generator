@@ -16,3 +16,7 @@ The For Loop then selects randomly from the created "passwordGen" array for the 
 
 
 I did not give my Git Hub repo a unique name but too late to change that now!
+
+ Your site is ready to be published at https://jeromeverdusco.github.io/Password-Generator/
+
+ https://github.com/JeromeVerdusco/Password-Generator
